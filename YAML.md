@@ -12,6 +12,7 @@ We'll learn how to work with YAML file.
 # What is YAML?
 
 Full form of YAML is **YAML Ain't Markup Language**, previously it was known as **Yet Another Markup Language**. It is a human-readable data serialization language to represent data. It is commonly used for configuration files, but could be used in many applications where data is being stored or transmitted.
+The extension of YAML file is `.yml` or `.yaml`.
 
 ## What is a Markup Language?
 
@@ -79,3 +80,105 @@ Like in Kubernetes, we store configuration data in YAML file. This configuration
 19. Supports self-referencing data types
 20. Supports recursive data types
 21. Easily convert to JSON and vice versa
+
+# Syntax
+
+It is very necessary to keep in mind that indentation is very important in YAML. It is used to define the relationship between the data. It is similar to the indentation in Python.
+
+YAML is a case-sensitive language. It means that the data is case-sensitive. For example, `name` and `Name` are two different things in YAML.
+
+You can check the syntax of YAML file using parsers like [YAML Lint](http://www.yamllint.com/).
+
+## Data types
+
+1. Scalar
+2. Sequence
+3. Mapping
+
+### Mapping(Dictionary/Hash Map)
+
+Mapping is a collection of key-value pairs. It is similar to a dictionary in Python. It is represented by a colon(:) between the key and value. The key and value are separated by a space.
+
+```yaml
+key: value
+```
+
+<b>Example:</b>
+
+```yaml
+name: John
+age: 30
+```
+
+### Sequence(List)
+
+List is a collection of items. It is similar to a list in Python. It is represented by a hyphen(-) before the item. The items are separated by a space.
+
+```yaml
+- item1
+- item2
+```
+
+<b>Example:</b>
+
+```yaml
+- John
+- 30
+```
+
+### Scalar(Single value/Variable/Constant)
+
+Scalar is a single value. It is similar to a variable in Python. It is represented by a colon(:) between the key and value. The key and value are separated by a space.
+
+Scalar is a simple data type. In YAML, scalar means a simple value for a key. The value of the scalar can be integer, float, Boolean, and string. Scalar data types are classified into two data types:
+
+1. Numeric Data type : Integer, Float and Boolean
+2. String (Text) Data type : String
+
+```yaml
+key: value
+```
+
+<b>Example:</b>
+
+```yaml
+name: John
+age: 30
+```
+
+## Data Structures
+
+1. Block Style
+2. Inline Style
+
+### Block Style (Complex data structures)
+
+Block style is used to represent complex data structures. It is represented by a colon(:) after the key. The key and value are separated by a space. The value is represented by a hyphen(-) before the item. The items are separated by a space.
+
+```yaml
+key:
+  - item1
+  - item2
+```
+
+<b>Example:</b>
+
+```yaml
+name:
+  - John
+  - Doe
+```
+
+### Inline Style (Complex data structures)
+
+Inline style is used to represent complex data structures. It is represented by a colon(:) after the key. The key and value are separated by a space. The value is represented by a hyphen(-) before the item. The items are separated by a comma(,).
+
+```yaml
+key: [item1, item2]
+```
+
+<b>Example:</b>
+
+```yaml
+name: [John, Doe]
+```
