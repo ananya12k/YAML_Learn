@@ -89,6 +89,35 @@ YAML is a case-sensitive language. It means that the data is case-sensitive. For
 
 You can check the syntax of YAML file using parsers like [YAML Lint](http://www.yamllint.com/).
 
+## Comments
+
+Comments are used to explain the code. It is used to make the code more readable. It is not executed by the compiler. It is represented by a hash(#) symbol.
+
+```yaml
+# This is a comment
+```
+
+<b>Example:</b>
+
+```yaml
+# This is a comment
+name: John
+```
+
+## Multiple Documents
+
+It is interesting to note that YAML supports multiple documents in a single file(object). It is represented by three hyphens(---) at the beginning of the document and three dots(...) at the end of the document.
+
+```yaml
+---
+document1
+---
+document2
+---
+document3
+...
+```
+
 ## Data types
 
 1. Scalar
