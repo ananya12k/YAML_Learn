@@ -1,0 +1,14 @@
+# Data is present, how do I represent it in Code?
+
+---
+School: 
+  Name: "DPS"
+  Address: "Delhi"
+  Students:
+    - Name: "Ananya"
+      Class: "XII"
+      Section: "A"
+    - Name: "Ananya"
+      Class: "XII"
+      Section: "A"
+   
