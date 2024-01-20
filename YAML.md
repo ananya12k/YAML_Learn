@@ -118,15 +118,35 @@ document3
 ...
 ```
 
+## Variables
+
+Variables are used to store data. It is represented by a colon(:) between the key and value. Key is the name of the variable and value is the data stored in the variable. The key and value are separated by a space.
+
+Variables should always be present. If the variable is not present, then it will throw an error.
+
+```yaml
+key: value
+```
+
 ## Data types
 
 1. Scalar
 2. Sequence
 3. Mapping
+4. Pairs
+5. Set
+6. Dictionary
 
 ### Mapping(Dictionary/Hash Map)
 
 Mapping is a collection of key-value pairs. It is similar to a dictionary in Python. It is represented by a colon(:) between the key and value. The key and value are separated by a space.
+Data type is !!map.
+
+Types of mapping:
+
+1. Nested mapping: A mapping inside a mapping is called a nested mapping.
+2. Explicit mapping: A mapping with !!map is called an explicit mapping.
+3. Implicit mapping: A mapping without !!map is called an implicit mapping.
 
 ```yaml
 key: value
@@ -142,6 +162,35 @@ age: 30
 ### Sequence(List)
 
 List is a collection of items. It is similar to a list in Python. It is represented by a hyphen(-) before the item. The items are separated by a space.
+
+The data type of the items in the list can be different. It can be a string, integer, float, Boolean, etc.
+Denoted by a hyphen(-) before the item.
+Data type is !!seq.
+
+1. Sparse seq: A seq with empty items is called a sparse list.
+2. Explicit seq: A seq with !!seq is called an explicit list.
+3. Implicit seq: A seq without !!seq is called an implicit list.
+4. Nested seq: A seq inside a seq is called a nested list.
+
+<b>Examples:</b>
+
+```yaml
+# Sparse seq
+- item1
+- item2
+- item3
+-
+- item5
+# Explicit seq
+!!seq [item1, item2, item3]
+# Implicit seq
+[item1, item2, item3]
+# Nested seq
+- item1
+- item2
+  - item3
+  - item4
+```
 
 ```yaml
 - item1
@@ -163,6 +212,8 @@ Scalar is a simple data type. In YAML, scalar means a simple value for a key. Th
 
 1. Numeric Data type : Integer, Float and Boolean
 2. String (Text) Data type : String
+3. Null Data type : Null
+4. Date and Time Data type : Timestamp
 
 ```yaml
 key: value
@@ -173,6 +224,102 @@ key: value
 ```yaml
 name: John
 age: 30
+```
+
+#### Numeric Data type
+
+1. Integer
+2. Float
+3. Boolean
+
+##### Integer
+
+Integer is a whole number. It is similar to an integer in Python. It is represented by a colon(:) between the key and value. The key and value are separated by a space.
+
+```yaml
+key: 568
+```
+
+##### Float
+
+Float is a decimal number. It is similar to a float in Python. It is represented by a colon(:) between the key and value. The key and value are separated by a space.
+
+```yaml
+key: 56.8
+marks: !!float 56.8
+infinity: !!float .inf
+not a number: !!float .nan
+```
+
+##### Boolean
+
+Boolean is a true or false value or yes/no,n/f,N/F. It is similar to a Boolean in Python. It is represented by a colon(:) between the key and value. The key and value are separated by a space.
+
+```yaml
+key: true
+```
+
+#### String
+
+String is a collection of characters. It is similar to a string in Python. It is represented by a colon(:) between the key and value. The key and value are separated by a space.
+
+There are 3 ways to represent a string in YAML:
+
+1. Single Quoted
+2. Double Quoted
+3. Literal Style
+
+##### Writing in multiple lines
+
+We can write a string in multiple lines. It is represented by a pipe(|) symbol. The pipe symbol is written after the colon(:) and the string is written in the next line.
+
+```yaml
+key: |
+  value
+```
+
+##### Single line in multiple lines
+
+We can write a single line in multiple lines. It is represented by a greater than(>) symbol. The greater than symbol is written after the colon(:) and the string is written in the next line.
+
+```yaml
+key: >
+  value
+```
+
+### Pairs
+
+Keys may have duplcate values. Data type is !!pairs.
+Internally, it will be stored as hash table containing arrays.
+
+```yaml
+pairs:
+  - key: value
+  - key: value
+```
+
+### Set
+
+Keys may not have duplcate values. Data type is !!set.
+
+```yaml
+set:
+  key:
+  Anu:
+```
+
+### Dictionary
+
+Keys' value are sequence of key-value pairs. Data type is !!omap.
+
+```yaml
+omap: !!omap
+  - Anu:
+      name: Anu
+      age: 30
+  - John:
+      name: John
+      age: 30
 ```
 
 ## Data Structures
@@ -210,4 +357,84 @@ key: [item1, item2]
 
 ```yaml
 name: [John, Doe]
+# Key-Value pair
+{mark: 50, age: 30}
+```
+
+## YAML to JSON
+
+We can convert YAML to JSON and vice versa. It is very easy to convert YAML to JSON. We can use [YAML to JSON](https://www.json2yaml.com/) to convert YAML to JSON.
+
+## Specify data types
+
+If you want to specify type in data types use `!!` and then specify the data type.
+
+```yaml
+key: !!data_type value
+```
+
+<b>Example:</b>
+
+```yaml
+name: !!str John
+age: !!int 30
+positiveNumber: !!float 56.8
+negativeNumber: !!float -56.8
+binary: !!bool true
+octal: !!int 0o137
+hexadecimal: !!int 0x7f
+sexagesimal: !!int 1:30
+date: !!timestamp 2021-06-21
+null: !!null null
+commaValue: !!int +1_000_000
+exponentialNotation: !!float 12e+2
+```
+
+## Anchors and References
+
+Anchors and references are used to reuse the data. It is represented by an ampersand(&) before the anchor name and an asterisk(\*) before the reference name.
+
+<b>Example:</b>
+
+```yaml
+# Anchors
+name: &name John
+age: 30
+# References
+name: *name
+age: 30
+```
+
+### Anchors
+
+What is the property you want to use?
+
+```yaml
+likings: &base # base is the anchor name
+  - apple
+  - orange
+  - banana
+person:
+  name: John
+  <<: *base # << is used to merge the data
+# Override the data
+person2:
+  name: Johnny
+  likings:
+    - apple
+    - orange
+    - banana
+    - mango
+```
+
+### References
+
+Reference is used to reuse the data. It is represented by an asterisk(\*) before the reference name.
+
+```yaml
+name: &name John
+age: 30
+person:
+  name: *name
+  age: 30
 ```
