@@ -3,6 +3,7 @@
 We'll learn how to work with YAML file.
 
 # Table of Contents
+<!-- Table of contents with links -->
 
 1. Introduction
 2. Syntax
