@@ -438,3 +438,23 @@ person:
   name: *name
   age: 30
 ```
+## Replicas
+
+Replicas is used to create multiple instances of the same object.
+Like in Kubernetes, we can create multiple instances of the same pod, service, deployment, etc.
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+```
